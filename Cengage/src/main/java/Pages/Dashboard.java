@@ -1,26 +1,22 @@
 package Pages;
 
 import Locators.DashboardConstants;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class TeacherDashboard extends BasePage{
+public class Dashboard extends BasePage{
 
-    @FindBy(css = DashboardConstants.assignmentsTab)
-    private WebElement assignmentsTab;
+    private By assignmentsTab = By.cssSelector(DashboardConstants.assignmentsTab);
 
-    @FindBy(css = DashboardConstants.profileIcon)
-    private WebElement profileIcon;
+    private By profileIcon = By.cssSelector(DashboardConstants.profileIcon);
 
-    @FindBy(css = DashboardConstants.myAccount)
-    private WebElement myAccount;
+    private By myAccount = By.cssSelector(DashboardConstants.myAccount);
 
-    @FindBy(css = DashboardConstants.logOut)
-    private WebElement logOut;
+    private By logOut = By.cssSelector(DashboardConstants.logOut);
 
-
-    public TeacherDashboard(WebDriver driver) {
+    public Dashboard(WebDriver driver) {
         super(driver);
     }
 

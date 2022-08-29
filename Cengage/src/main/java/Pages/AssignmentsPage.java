@@ -1,6 +1,7 @@
 package Pages;
 
 import Locators.AssignmentsPageConstants;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,50 +11,47 @@ import java.util.List;
 
 public class AssignmentsPage extends BasePage {
 
-    @FindBy(css = AssignmentsPageConstants.newAssignmentButton)
-    private WebElement newAssignmentButton;
+    private By newAssignmentButton = By.cssSelector(AssignmentsPageConstants.newAssignmentButton);
 
-    @FindBy(xpath = AssignmentsPageConstants.filterAll)
-    private WebElement filterAll;
+    private By filterAll = By.xpath(AssignmentsPageConstants.filterAll);
 
-    @FindBy(xpath = AssignmentsPageConstants.filterActive)
-    private WebElement filterActive;
+    private By filterActive = By.xpath(AssignmentsPageConstants.filterActive);
 
-    @FindBy(xpath = AssignmentsPageConstants.filterExpired)
-    private WebElement filterExpired;
+    private By filterExpired = By.xpath(AssignmentsPageConstants.filterExpired);
 
-    @FindBy(id = AssignmentsPageConstants.courseDDMenu)
-    private WebElement courseDDMenu;
+    private By selectedFilterOption = By.className(AssignmentsPageConstants.selectedFilterOption);
 
-    @FindBy(css = AssignmentsPageConstants.courseList)
-    private WebElement courseList;
+    private By courseDDMenu = By.id(AssignmentsPageConstants.courseDDMenu);
 
-    @FindBy(css = AssignmentsPageConstants.assignmentName)
-    private WebElement assignmentName;
+    private By courseList = By.cssSelector(AssignmentsPageConstants.courseList);
 
-    @FindBy(css = AssignmentsPageConstants.courses)
-    private WebElement courses;
+    private By assignmentName = By.cssSelector(AssignmentsPageConstants.assignmentName);
 
-    @FindBy(css = AssignmentsPageConstants.endDate)
-    private WebElement endDate;
+    private By courses = By.cssSelector(AssignmentsPageConstants.courses);
 
-    @FindBy(css = AssignmentsPageConstants.manualGrading)
-    private WebElement manualGrading;
+    private By endDate = By.cssSelector(AssignmentsPageConstants.endDate);
 
-    @FindBy(css = AssignmentsPageConstants.dataRowListPerPage)
-    private List<WebElement> assignmentsListPerPage;
+    private By manualGrading = By.cssSelector(AssignmentsPageConstants.manualGrading);
 
-    @FindBy(css = AssignmentsPageConstants.availablePageList)
-    private List<WebElement> availablePageList;
+    private By assignmentsListPerPage = By.cssSelector(AssignmentsPageConstants.dataRowListPerPage);
 
-    @FindBy(css = AssignmentsPageConstants.perPageSelector)
-    private WebElement perPageSelector;
+    private By availablePageList = By.cssSelector(AssignmentsPageConstants.availablePageList);
 
-    @FindBy(css = AssignmentsPageConstants.perPageSelectorOptions)
-    private List<WebElement> perPageSelectorOptions;
+    private By perPageSelector = By.cssSelector(AssignmentsPageConstants.perPageSelector);
+
+    private By perPageSelectorOptions = By.cssSelector(AssignmentsPageConstants.perPageSelectorOptions);
+
 
     public AssignmentsPage(WebDriver driver) {
         super(driver);
+    }
+
+    public WebElement getFilterAllOption(){
+        return driver.findElement(filterAll);
+    }
+
+    public WebElement getSelectedFilterOption(){
+        return driver.findElement(selectedFilterOption);
     }
 
     public void displayAllAssignments() {
@@ -61,17 +59,22 @@ public class AssignmentsPage extends BasePage {
     }
 
     public void selectPerPageOption(int perPageOption) {
-        click(perPageSelector);
-        perPageSelectorOptions.get(perPageOption / 10 - 1).click();
+        if(perPageOption==10 || perPageOption==20 || perPageOption==30 || perPageOption==40 || perPageOption==50){
+            click(perPageSelector);
+            driver.findElements(perPageSelectorOptions).get(perPageOption / 10 - 1).click();
+        }else{
+            System.out.println("Invalid option");
+        }
+
     }
 
     public int amountOfPages() {
-        return availablePageList.size();
+        return driver.findElements(availablePageList).size();
     }
 
     public void navigatePage(int number) {
         if (number <= amountOfPages()) {
-            click(availablePageList.get(number - 1));
+            driver.findElements(availablePageList).get(number - 1).click();
         } else {
             System.out.println("Entered page is not found");
         }
@@ -80,15 +83,15 @@ public class AssignmentsPage extends BasePage {
     public List<WebElement> listOfAllAssignments() {
         List<WebElement> allAssignmentsList = new ArrayList<>();
         for (int i = 0; i < amountOfPages(); i++) {
-            allAssignmentsList.addAll(assignmentsListPerPage);
+            allAssignmentsList.addAll(driver.findElements(assignmentsListPerPage));
         }
         return allAssignmentsList;
     }
 
     public int allAssignmentsCount(){
         selectPerPageOption(50);
-        click(availablePageList.get(amountOfPages() - 1));
-        int assignmentsAmountOnLastPage = assignmentsListPerPage.size();
+        driver.findElements(availablePageList).get(amountOfPages() - 1).click();
+        int assignmentsAmountOnLastPage = driver.findElements(assignmentsListPerPage).size();
         return amountOfPages()*10 + assignmentsAmountOnLastPage;
     }
 

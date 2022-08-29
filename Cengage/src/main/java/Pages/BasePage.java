@@ -1,5 +1,6 @@
 package Pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,26 +17,26 @@ public class BasePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    public void waitVisibilityOf (WebElement element){
-        wait.until(ExpectedConditions.visibilityOf(element));
+    public void waitElementToBeLocated (By elementBy){
+        wait.until(ExpectedConditions.presenceOfElementLocated(elementBy));
     }
 
-    public void waitToBeClickable (WebElement element){
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+    public void waitToBeClickable (By elementBy){
+        wait.until(ExpectedConditions.elementToBeClickable(elementBy));
     }
 
-    public void click(WebElement element){
-        waitToBeClickable(element);
-        element.click();
+    public void click(By elementBy){
+        waitToBeClickable(elementBy);
+        driver.findElement(elementBy).click();
     }
 
-    public void enterText (WebElement element, String text){
-        waitVisibilityOf(element);
-        element.sendKeys(text);
+    public void enterText (By elementBy, String text){
+        waitElementToBeLocated(elementBy);
+        driver.findElement(elementBy).sendKeys(text);
     }
 
-    public String readText (WebElement element){
-        waitVisibilityOf(element);
-        return element.getText();
+    public String readText (By elementBy){
+        waitElementToBeLocated(elementBy);
+        return driver.findElement(elementBy).getText();
     }
 }

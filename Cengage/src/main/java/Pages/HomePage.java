@@ -1,5 +1,6 @@
 package Pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,23 +9,24 @@ import Locators.HomePageConstants;
 
 public class HomePage extends BasePage{
 
-    @FindBy(css = HomePageConstants.cookiePopUp )
-    private WebElement cookiePopUpGotItButton;
+    public static final String baseURL = "https://web-cen-unity-stage.avallain.net/";
 
-    @FindBy(css = HomePageConstants.signInButton)
-    private WebElement signInButton;
+    private By cookiePopUpGotItButton = By.cssSelector(HomePageConstants.cookiePopUp);
 
-    @FindBy(css = HomePageConstants.username)
-    private WebElement username;
+    private By signInButton = By.cssSelector(HomePageConstants.signInButton);
 
-    @FindBy(css = HomePageConstants.password)
-    private WebElement password;
+    private By username = By.cssSelector(HomePageConstants.username);
 
-    @FindBy(css = HomePageConstants.submit)
-    private WebElement submitSignInButton;
+    private By password = By.cssSelector(HomePageConstants.password);
+
+    private By submitSignInButton = By.cssSelector(HomePageConstants.submit);
 
     public HomePage(WebDriver driver) {
         super(driver);
+    }
+
+    public void navigateHomePage(){
+        driver.get(baseURL);
     }
 
     public void cookiePopUpAccept() {
@@ -46,4 +48,18 @@ public class HomePage extends BasePage{
     public void clickSubmitSignInButton() {
         click(submitSignInButton);
     }
+
+    //log in
+    public Dashboard logIn(String username, String password){
+        navigateHomePage();
+        cookiePopUpAccept();
+        clickSignInButton();
+        fillUsername(username);
+        fillPassword(password);
+        clickSubmitSignInButton();
+        return new Dashboard(driver);
+    }
+
+
+
 }

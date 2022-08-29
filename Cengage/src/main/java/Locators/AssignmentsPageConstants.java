@@ -8,6 +8,7 @@ public class AssignmentsPageConstants {
     public static final String filterAll = "//div[@class='filter']/div/div[1][1]";
     public static final String filterActive = "//div[@class='filter']/div/div[2]";
     public static final String filterExpired = "//div[@class='filter']/div/div[3]";
+    public static final String selectedFilterOption = "cLbCTY"; //classname
 
     //course
     public static final String courseDDMenu = "dropdown-container"; //ID
