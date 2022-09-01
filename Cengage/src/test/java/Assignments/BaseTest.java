@@ -44,24 +44,16 @@ public class BaseTest {
             File screenshot = camera.getScreenshotAs(OutputType.FILE);
             try{
                 Random rn =new Random();
-                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-                System.out.println("lllllll"+ LocalDateTime.now());
-                Files.move(screenshot, new File("resources/screenshots/" + result.getName() + timeStamp + ".png"));
+                Files.move(screenshot, new File("resources/screenshots/" + result.getName() + ".png"));
             }catch(IOException e){
                 e.printStackTrace();
             }
         }
     }
 
-//    @AfterClass
-//    public static void closeBrowser() {
-//        WebElement username = driver.findElement(By.className("username"));
-//        username.click();
-//        WebElement logOut = driver.findElement(By.className("logout-button"));
-//        logOut.click();
-//        WebElement wait = new WebDriverWait(driver, Duration.ofSeconds(10))
-//                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#menu-item-2887>a")));
-//        driver.quit();
-//    }
+    @AfterClass
+    public static void closeBrowser() {
+       driver.quit();
+    }
 
 }

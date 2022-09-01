@@ -5,10 +5,11 @@ public class AssignmentsPageConstants {
     public static final String newAssignmentButton = "[data-qa-id ='course-assignments_new-assignment_link']";
 
     //toggle
+    public static final String filter = "//div[@class='filter']/div";
     public static final String filterAll = "//div[@class='filter']/div/div[1][1]";
     public static final String filterActive = "//div[@class='filter']/div/div[2]";
     public static final String filterExpired = "//div[@class='filter']/div/div[3]";
-    public static final String selectedFilterOption = "cLbCTY"; //classname
+    public static final String selectedFilter = "cLbCTY"; //classname
 
     //course
     public static final String courseDDMenu = "dropdown-container"; //ID
@@ -22,6 +23,7 @@ public class AssignmentsPageConstants {
 
     //assignment rows
     public static final String dataRowListPerPage = "[data-row='true']";
+    public static final String assignmentRowEndDate = "[class*='simple-row-cel']:nth-child(3)";
 
     //pagination
     public static final String availablePageList = "[aria-label*=Page]";

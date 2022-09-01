@@ -1,5 +1,6 @@
 package Assignments;
 
+import Pages.AssignmentsPage;
 import Pages.BasePage;
 import Pages.HomePage;
 import org.openqa.selenium.By;
@@ -18,16 +19,44 @@ import java.util.List;
 public class AssignmentsPageTest extends BaseTest {
 
     @Test(priority = 0)
-    public void testDefaultValueOfFilter() {
+    public void testIfFilerExists(){
         homePage = new HomePage(driver);
         homePage.navigateHomePage();
 //        homePage.cookiePopUpAccept();
         dashboard = homePage.logIn("teacher_reg", "Password1");
         assignmentsPage = dashboard.navigateAssignmentsPage();
-        String filterAllOptionText = assignmentsPage.getFilterAllOption().getText();
-        String selectedFilterOptionText = assignmentsPage.getSelectedFilterOption().getText();
-        Assert.assertEquals(filterAllOptionText, selectedFilterOptionText);
+        Assert.assertTrue(assignmentsPage.isFilterPresent(), "The filter is missing.");
+    }
 
+    @Test(priority = 1, dependsOnMethods = "testIfFilerExists")
+    public void testDefaultValueOfFilter() {
+        String filterAllOptionText = assignmentsPage.getTextOfAllTab();
+        String selectedFilterOptionText = assignmentsPage.getTextOfSelectedTab();
+        Assert.assertEquals(filterAllOptionText, selectedFilterOptionText);
+    }
+
+    @Test(priority = 2, dependsOnMethods = "testIfFilerExists")
+    public void testActiveTab(){
+        assignmentsPage.selectActiveFromFilter();
+
+    }
+    @Test(dependsOnMethods = "testIfFilerExists")
+    public void test() throws InterruptedException {
+        System.out.println("HI");
+        System.out.println(assignmentsPage.listOfAllFilteredAssignments().size());
+        System.out.println("bye");
+
+    }
+
+    @Test(dependsOnMethods = "testIfFilerExists")
+    public void testT() throws InterruptedException {
+        boolean isActive;
+        for(WebElement assignmentRow: assignmentsPage.listOfAllFilteredAssignments()){
+            WebElement endDate = assignmentRow.findElement(By.cssSelector("[class*='simple-row-cel']:nth-child(3)");
+            if(assignmentsPage.isAssignmentActive(endDate)){
+
+            }
+        }
     }
 
 //    @Test
