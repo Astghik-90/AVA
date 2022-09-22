@@ -9,10 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,11 +26,14 @@ public class BaseTest {
      protected Dashboard dashboard;
      protected AssignmentsPage assignmentsPage;
 
-    @BeforeClass
-    public static void initWebDriver() throws MalformedURLException {
+    @BeforeTest
+    public void initWebDriver() throws MalformedURLException {
         System.setProperty("webdriver.chrome.driver", "C:/Users/Admin/WorkSpace/AVA/Cengage/resources/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        homePage = new HomePage(driver);
+        homePage.navigateHomePage();
+//        homePage.cookiePopUpAccept();
     }
 
     @AfterMethod
@@ -51,7 +51,7 @@ public class BaseTest {
         }
     }
 
-    @AfterClass
+    @AfterTest
     public static void closeBrowser() {
        driver.quit();
     }

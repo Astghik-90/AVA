@@ -22,6 +22,7 @@ public class Dashboard extends BasePage{
 
     public AssignmentsPage navigateAssignmentsPage(){
         click(assignmentsTab);
+        wait(3000);
         return new AssignmentsPage(driver);
     }
 
