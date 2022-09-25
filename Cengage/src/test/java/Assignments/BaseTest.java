@@ -21,10 +21,10 @@ import java.util.Calendar;
 import java.util.Random;
 
 public class BaseTest {
-     protected static WebDriver driver;
-     protected HomePage homePage;
-     protected Dashboard dashboard;
-     protected AssignmentsPage assignmentsPage;
+    protected static WebDriver driver;
+    protected HomePage homePage;
+    protected Dashboard dashboard;
+    protected AssignmentsPage assignmentsPage;
 
     @BeforeTest
     public void initWebDriver() throws MalformedURLException {
@@ -37,15 +37,14 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void recordFailure (ITestResult result){
-        if(ITestResult.FAILURE == result.getStatus())
-        {
-            var camera = (TakesScreenshot)driver;
+    public void recordFailure(ITestResult result) {
+        if (ITestResult.FAILURE == result.getStatus()) {
+            var camera = (TakesScreenshot) driver;
             File screenshot = camera.getScreenshotAs(OutputType.FILE);
-            try{
-                Random rn =new Random();
+            try {
+                Random rn = new Random();
                 Files.move(screenshot, new File("resources/screenshots/" + result.getName() + ".png"));
-            }catch(IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -53,7 +52,7 @@ public class BaseTest {
 
     @AfterTest
     public static void closeBrowser() {
-       driver.quit();
+        driver.quit();
     }
 
 }

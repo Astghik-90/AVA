@@ -26,6 +26,7 @@ public class AssignmentsPageConstants {
     public static final String assignmentRowEndDate = "[class*='simple-row-cel']:nth-child(3)";
     public static final String assignmentRowCourse = "[class*='simple-row-cel']:nth-child(2)>div";
     public static final String assignmentRowName = "[class*='simple-row-cel']:nth-child(1)>div>a>div";
+    public static final String manualGradingNumber = "[class*='simple-row-cel']:nth-child(4)>div>span";
 
     //pagination
     public static final String availablePageList = "[aria-label*=Page]";
