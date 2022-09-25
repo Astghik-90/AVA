@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 import Locators.HomePageConstants;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
 
     public static final String baseURL = "https://web-cen-unity-stage.avallain.net/";
 
@@ -25,7 +25,7 @@ public class HomePage extends BasePage{
         super(driver);
     }
 
-    public void navigateHomePage(){
+    public void navigateHomePage() {
         driver.get(baseURL);
     }
 
@@ -50,7 +50,7 @@ public class HomePage extends BasePage{
     }
 
     //log in
-    public Dashboard logIn(String username, String password){
+    public Dashboard logIn(String username, String password) {
         navigateHomePage();
         cookiePopUpAccept();
         clickSignInButton();
@@ -59,7 +59,6 @@ public class HomePage extends BasePage{
         clickSubmitSignInButton();
         return new Dashboard(driver);
     }
-
 
 
 }

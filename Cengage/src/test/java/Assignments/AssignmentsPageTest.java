@@ -24,7 +24,7 @@ public class AssignmentsPageTest extends BaseTest {
 
     SoftAssert softAssert = new SoftAssert();
 
-    @BeforeTest
+    @BeforeClass
     public void goToAssignmentsPage() {
         dashboard = homePage.logIn("ava_qa_teachy", "Password1");
         assignmentsPage = dashboard.navigateAssignmentsPage();

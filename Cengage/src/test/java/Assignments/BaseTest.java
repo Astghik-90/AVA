@@ -26,7 +26,7 @@ public class BaseTest {
     protected Dashboard dashboard;
     protected AssignmentsPage assignmentsPage;
 
-    @BeforeTest
+    @BeforeClass
     public void initWebDriver() throws MalformedURLException {
         System.setProperty("webdriver.chrome.driver", "C:/Users/Admin/WorkSpace/AVA/Cengage/resources/chromedriver.exe");
         driver = new ChromeDriver();
@@ -50,7 +50,7 @@ public class BaseTest {
         }
     }
 
-    @AfterTest
+    @AfterClass
     public static void closeBrowser() {
         driver.quit();
     }

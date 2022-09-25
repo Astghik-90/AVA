@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class Dashboard extends BasePage{
+public class Dashboard extends BasePage {
 
     private By assignmentsTab = By.cssSelector(DashboardConstants.assignmentsTab);
 
@@ -20,13 +20,13 @@ public class Dashboard extends BasePage{
         super(driver);
     }
 
-    public AssignmentsPage navigateAssignmentsPage(){
+    public AssignmentsPage navigateAssignmentsPage() {
         click(assignmentsTab);
         wait(3000);
         return new AssignmentsPage(driver);
     }
 
-    public HomePage logOut(){
+    public HomePage logOut() {
         click(profileIcon);
         click(logOut);
         return new HomePage(driver);

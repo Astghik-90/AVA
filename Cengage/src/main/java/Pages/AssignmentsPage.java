@@ -65,37 +65,37 @@ public class AssignmentsPage extends BasePage {
     }
 
 
-    public String getTextOfAllTab(){
+    public String getTextOfAllTab() {
         return readText(filterAll);
     }
 
-    public String getTextOfActiveTab(){
+    public String getTextOfActiveTab() {
         return readText(filterActive);
     }
 
-    public String getTextOfExpiredTab(){
+    public String getTextOfExpiredTab() {
         return readText(filterExpired);
     }
 
-    public String getTextOfSelectedTab(){
+    public String getTextOfSelectedTab() {
         return readText(selectedFilter);
     }
 
-    public boolean isFilterPresent(){
+    public boolean isFilterPresent() {
         return isElementPresent(filter);
     }
 
-    public void filterAllAssignments(){
+    public void filterAllAssignments() {
         click(filterAll);
         wait(3000);
     }
 
-    public void filterActiveAssignments(){
+    public void filterActiveAssignments() {
         click(filterActive);
         wait(3000);
     }
 
-    public void filterExpiredAssignments(){
+    public void filterExpiredAssignments() {
         click(filterExpired);
         wait(3000);
     }
@@ -111,14 +111,14 @@ public class AssignmentsPage extends BasePage {
         WebElement endDateOfAssignment = assignmentRow.findElement(assignmentRowEndDate);
         String endDateText = readText(assignmentRowEndDate);
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy, HH:mm");
-        if(endDateText == "") {
+        if (endDateText == "") {
             isActive = true;
-        }else{
+        } else {
             Date endDate = formatter.parse(endDateText);
             Date today = new Date();
-            if(endDate.before(today)){
+            if (endDate.before(today)) {
                 isActive = false;
-            }else{
+            } else {
                 isActive = true;
             }
         }
@@ -126,9 +126,9 @@ public class AssignmentsPage extends BasePage {
     }
 
     public boolean areAssignmentsActive(List<WebElement> assignmentsList) throws ParseException {
-        boolean areActive=true;
+        boolean areActive = true;
         for (int i = 0; i < assignmentsList.size(); i++) {
-            if (!isAssignmentActive(assignmentsList.get(i))){
+            if (!isAssignmentActive(assignmentsList.get(i))) {
                 areActive = false;
                 break;
             }
@@ -137,9 +137,9 @@ public class AssignmentsPage extends BasePage {
     }
 
     public boolean areAssignmentsExpired(List<WebElement> assignmentsList) throws ParseException {
-        boolean areExpired=true;
+        boolean areExpired = true;
         for (int i = 0; i < assignmentsList.size(); i++) {
-            if (isAssignmentActive(assignmentsList.get(i))){
+            if (isAssignmentActive(assignmentsList.get(i))) {
                 areExpired = false;
                 break;
             }
@@ -149,23 +149,23 @@ public class AssignmentsPage extends BasePage {
 
     // in case there are more than 1 page available in Pagination.
     public boolean areAllFilteredAssignmentsActive() throws InterruptedException, ParseException {
-        if(!areAssignmentsActive(getAssignmentsOnThePage())) return false;
+        if (!areAssignmentsActive(getAssignmentsOnThePage())) return false;
 
-        for (int i = 2; i < amountOfPages()+1; i++) {
+        for (int i = 2; i < amountOfPages() + 1; i++) {
             navigatePage(i);
-            if(!areAssignmentsActive(getAssignmentsOnThePage())){
+            if (!areAssignmentsActive(getAssignmentsOnThePage())) {
                 return false;
             }
         }
-       return true;
+        return true;
     }
 
     public boolean areAllFilteredAssignmentsExpired() throws InterruptedException, ParseException {
-        if(!areAssignmentsExpired(getAssignmentsOnThePage())) return false;
+        if (!areAssignmentsExpired(getAssignmentsOnThePage())) return false;
 
-        for (int i = 2; i < amountOfPages()+1; i++) {
+        for (int i = 2; i < amountOfPages() + 1; i++) {
             navigatePage(i);
-            if(!areAssignmentsExpired(getAssignmentsOnThePage())){
+            if (!areAssignmentsExpired(getAssignmentsOnThePage())) {
                 return false;
             }
         }
@@ -173,10 +173,10 @@ public class AssignmentsPage extends BasePage {
     }
 
     public void selectPerPageOption(int perPageOption) {
-        if(perPageOption==10 || perPageOption==20 || perPageOption==30 || perPageOption==40 || perPageOption==50){
+        if (perPageOption == 10 || perPageOption == 20 || perPageOption == 30 || perPageOption == 40 || perPageOption == 50) {
             click(perPageSelector);
             driver.findElements(perPageSelectorOptions).get(perPageOption / 10 - 1).click();
-        }else{
+        } else {
             System.out.println("Invalid option");
         }
         wait(2000);
@@ -200,11 +200,11 @@ public class AssignmentsPage extends BasePage {
         int lastPagesNum = amountOfPages();
         navigatePage(lastPagesNum);
         int assignmentsAmountOnLastPage = getAssignmentsOnThePage().size();
-        int num = (lastPagesNum-1)*10 + assignmentsAmountOnLastPage;
+        int num = (lastPagesNum - 1) * 10 + assignmentsAmountOnLastPage;
         return num;
     }
 
-    public String selectCourse(int index){
+    public String selectCourse(int index) {
         click(courseDDMenu);
         WebElement course = driver.findElements(courseList).get(index);
         String courseName = course.getText();
@@ -213,7 +213,7 @@ public class AssignmentsPage extends BasePage {
         return courseName;
     }
 
-    public void selectAllCourses(){
+    public void selectAllCourses() {
         click(courseDDMenu);
         WebElement allCourses = driver.findElements(courseList).get(0);
         allCourses.click();
@@ -234,7 +234,7 @@ public class AssignmentsPage extends BasePage {
         click(assignmentName);
         wait(3000);
         List<WebElement> sortedAssignmentsList = getAssignmentsOnThePage();
-        List <String> assignmentsNameList = new ArrayList<>();
+        List<String> assignmentsNameList = new ArrayList<>();
         for (int i = 0; i < sortedAssignmentsList.size(); i++) {
             WebElement assignmentName = sortedAssignmentsList.get(i).findElement(assignmentRowName);
             assignmentsNameList.add(assignmentName.getText());
@@ -246,7 +246,7 @@ public class AssignmentsPage extends BasePage {
         click(courses);
         wait(3000);
         List<WebElement> sortedAssignmentsList = getAssignmentsOnThePage();
-        List <String> assignmentsCourseList = new ArrayList<>();
+        List<String> assignmentsCourseList = new ArrayList<>();
         for (int i = 0; i < sortedAssignmentsList.size(); i++) {
             WebElement assignmentName = sortedAssignmentsList.get(i).findElement(assignmentRowCourse);
             assignmentsCourseList.add(assignmentName.getText());
@@ -258,7 +258,7 @@ public class AssignmentsPage extends BasePage {
         click(endDate);
         wait(3000);
         List<WebElement> sortedAssignmentsList = getAssignmentsOnThePage();
-        List <String> EndDateList = new ArrayList<>();
+        List<String> EndDateList = new ArrayList<>();
         for (int i = 0; i < sortedAssignmentsList.size(); i++) {
             WebElement assignmentName = sortedAssignmentsList.get(i).findElement(assignmentRowEndDate);
             EndDateList.add(assignmentName.getText());
@@ -268,11 +268,11 @@ public class AssignmentsPage extends BasePage {
 
     public Integer getManualGradingNumberFromAssignmentRow(WebElement assignmentRow) {
         Integer num = 0;
-        try{
+        try {
             WebElement mm = assignmentRow.findElement(assignmentRowManualGrading);
             num = Integer.parseInt(mm.getText());
-        }catch (NoSuchElementException e){
-            
+        } catch (NoSuchElementException e) {
+
         }
         return num;
     }

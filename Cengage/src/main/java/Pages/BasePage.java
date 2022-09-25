@@ -113,10 +113,10 @@ public class BasePage {
             String current = list.get(i);
             String next = list.get(i + 1);
 
-            Date currentRowDate = current.isEmpty() ? formatter.parse("01/Jan/3030, 00:00"): formatter.parse(current);
-            Date nextRowDate = next.isEmpty() ? formatter.parse("01/Jan/3030, 00:00"): formatter.parse(next);
+            Date currentRowDate = current.isEmpty() ? formatter.parse("01/Jan/3030, 00:00") : formatter.parse(current);
+            Date nextRowDate = next.isEmpty() ? formatter.parse("01/Jan/3030, 00:00") : formatter.parse(next);
 
-            if(currentRowDate.after(nextRowDate)){
+            if (currentRowDate.after(nextRowDate)) {
                 System.out.println("current: " + current + "\n" + "next: " + next);
                 return false;
             }
@@ -132,10 +132,10 @@ public class BasePage {
             String current = list.get(i);
             String next = list.get(i + 1);
 
-            Date currentRowDate = current.isEmpty() ? formatter.parse("01/Jan/3030, 00:00"): formatter.parse(current);
-            Date nextRowDate = next.isEmpty() ? formatter.parse("01/Jan/3030, 00:00"): formatter.parse(next);
+            Date currentRowDate = current.isEmpty() ? formatter.parse("01/Jan/3030, 00:00") : formatter.parse(current);
+            Date nextRowDate = next.isEmpty() ? formatter.parse("01/Jan/3030, 00:00") : formatter.parse(next);
 
-            if(currentRowDate.before(nextRowDate)){
+            if (currentRowDate.before(nextRowDate)) {
                 System.out.println("current: " + current + "\n" + "next: " + next);
                 return false;
             }
@@ -143,24 +143,24 @@ public class BasePage {
         return true;
     }
 
-    public boolean isIntegersListSorted(List<Integer> list){
-        if(list.isEmpty() || list.size() == 1) return true;
-        for (int i = 0; i < list.size()-1; i++) {
-            if(list.get(i)>list.get(i+1)){
+    public boolean isIntegersListSorted(List<Integer> list) {
+        if (list.isEmpty() || list.size() == 1) return true;
+        for (int i = 0; i < list.size() - 1; i++) {
+            if (list.get(i) > list.get(i + 1)) {
                 System.out.println("Not sorted");
-                System.out.println(list.get(i) + "\n" + list.get(i+1));
+                System.out.println(list.get(i) + "\n" + list.get(i + 1));
                 return false;
             }
         }
         return true;
     }
 
-    public boolean isIntegersListReverseSorted(List<Integer> list){
-        if(list.isEmpty() || list.size() == 1) return true;
-        for (int i = 0; i < list.size()-1; i++) {
-            if(list.get(i)<list.get(i)){
+    public boolean isIntegersListReverseSorted(List<Integer> list) {
+        if (list.isEmpty() || list.size() == 1) return true;
+        for (int i = 0; i < list.size() - 1; i++) {
+            if (list.get(i) < list.get(i)) {
                 System.out.println("Nor reverseSorted");
-                System.out.println(list.get(i) + "\n" + list.get(i+1));
+                System.out.println(list.get(i) + "\n" + list.get(i + 1));
                 return false;
             }
         }
