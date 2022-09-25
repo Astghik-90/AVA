@@ -272,14 +272,14 @@ public class AssignmentsPage extends BasePage {
             WebElement mm = assignmentRow.findElement(assignmentRowManualGrading);
             num = Integer.parseInt(mm.getText());
         }catch (NoSuchElementException e){
-            e.printStackTrace();
+            
         }
         return num;
     }
 
     public List<Integer> sortByManualGrading() throws InterruptedException {
         click(manualGrading);
-        wait(2000);
+        wait(3000);
         List<WebElement> sortedAssignmentList = getAssignmentsOnThePage();
         List<Integer> mmList = new ArrayList<>();
         for (int i = 0; i < sortedAssignmentList.size(); i++) {

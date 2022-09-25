@@ -125,8 +125,5 @@ public class AssignmentsPageTest extends BaseTest {
         softAssert.assertAll();
     }
 
-//    @Test(description = "Verify sorting on the 'Assignments' page.", priority = 3)
-//    public void
-
 }
 

@@ -146,9 +146,9 @@ public class BasePage {
     public boolean isIntegersListSorted(List<Integer> list){
         if(list.isEmpty() || list.size() == 1) return true;
         for (int i = 0; i < list.size()-1; i++) {
-            if(i>i+1){
+            if(list.get(i)>list.get(i+1)){
                 System.out.println("Not sorted");
-                System.out.println(i + "\n" + (i+1));
+                System.out.println(list.get(i) + "\n" + list.get(i+1));
                 return false;
             }
         }
@@ -158,9 +158,9 @@ public class BasePage {
     public boolean isIntegersListReverseSorted(List<Integer> list){
         if(list.isEmpty() || list.size() == 1) return true;
         for (int i = 0; i < list.size()-1; i++) {
-            if(i<i+1){
+            if(list.get(i)<list.get(i)){
                 System.out.println("Nor reverseSorted");
-                System.out.println(i + "\n" + (i+1));
+                System.out.println(list.get(i) + "\n" + list.get(i+1));
                 return false;
             }
         }
