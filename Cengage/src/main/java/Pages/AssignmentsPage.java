@@ -289,5 +289,10 @@ public class AssignmentsPage extends BasePage {
         return mmList;
     }
 
+    public CreateNewAssignmentPage navigateCreateNewAssignmentPage(){
+        click(newAssignmentButton);
+        return new CreateNewAssignmentPage(driver);
+    }
+
 
 }
